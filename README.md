@@ -1,3 +1,7 @@
+# spotify-clone-api
+Create a clone of Spotify using ReactJS for the frontend and an ASP.NET CORE Web API for the backend
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
