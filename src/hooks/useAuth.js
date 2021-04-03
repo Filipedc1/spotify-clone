@@ -9,6 +9,8 @@ export default function useAuth(code) {
   const [expiresIn, setExpiresIn] = useState()
 
   useEffect(() => {
+    if (accessToken) return
+
     axios
       .post(`${baseApiUrl}/login`, {
         code,
@@ -17,7 +19,7 @@ export default function useAuth(code) {
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
-        window.history.pushState({}, null, "/")
+        window.history.pushState({}, null, "/dashboard")
       })
       .catch((error) => {
         console.log(error)
@@ -43,6 +45,7 @@ export default function useAuth(code) {
         })
     }, (expiresIn - 60) * 1000)
 
+    // returning a function within the useEffect Hook specifies how to "Clean Up" after
     return () => clearInterval(interval)
   }, [refreshToken, expiresIn])
 
